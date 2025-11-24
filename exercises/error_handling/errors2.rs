@@ -19,14 +19,23 @@
 // Execute `rustlings hint errors2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::num::ParseIntError;
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>();
+    // according to the return value of the function, parse maybe failed, so qty must return a Result.
+    // so I need to have a check. Is the "qty" parsed correctly "?"
+    // Yeah, a nice grammar candy.
+    let qty = item_quantity.parse::<i32>()?;
+
+    // or maybe there is a another way.
+    // the primitive way, just match the Result of "qty"
+    // match item_quantity.parse::<i32>() {
+    //     Ok(qty) => Ok(qty * cost_per_item + processing_fee),
+    //     Err(e) => Err(e)
+    // }
 
     Ok(qty * cost_per_item + processing_fee)
 }
