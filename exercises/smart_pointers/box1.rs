@@ -18,11 +18,17 @@
 //
 // Execute `rustlings hint box1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
 
+
+// Alright, noticed that List may be null or not.
+// So... It doesn't have a determined length.
+// However, its location has a determined length.
+// and I'd like to use Box<>
+// Well, Box is always used for recursive
+// Rules, ha.
 #[derive(PartialEq, Debug)]
 pub enum List {
-    Cons(i32, List),
+    Cons(i32, Box<List>),
     Nil,
 }
 
@@ -35,11 +41,11 @@ fn main() {
 }
 
 pub fn create_empty_list() -> List {
-    todo!()
+    List::Nil
 }
 
 pub fn create_non_empty_list() -> List {
-    todo!()
+    List::Cons(0, Box::new(List::Nil))
 }
 
 #[cfg(test)]

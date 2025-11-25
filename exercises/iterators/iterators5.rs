@@ -11,7 +11,6 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
@@ -35,7 +34,16 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    // So I have to create a iterator for Hashmap
+    // Yeah, it's a iterator for a 'special' data structure....
+    // so I need to use .values()
+    // and then I have to filter all the values
+    // finally, this time I don't have to collect what the iterator want or use a closure to fold them,
+    // I just want to count, thanks to the .count()
+    // wait a minite, values will return a Option<>, and Filter will return a Result<>
+    // In total, It mean Option<Result<{the actual result I want}>>
+    // So, I have to ref this val twice, because I have to let this function return a usize
+    map.values().filter(|&&val| val == value).count()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,7 +62,17 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    // well, this can be translated into "Vec", and then, iterator of the Vec first,
+    // When iter, it will have all the HashMap, and then I have to iterate all the values of them
+    // and then iterate the HashMap, and then filter + count
+    // actually, I can use the count_collection_for above.
+    // Or I can use fold
+    // and reuse count_iterator
+    // Yeah, do you like what you see?
+    collection.iter()
+        .fold(0, |total, map| {
+            total + count_iterator(map, value)
+        })
 }
 
 #[cfg(test)]
