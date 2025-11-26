@@ -7,10 +7,10 @@
 // Execute `rustlings hint tests8` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 fn main() {}
 
+// pass the test in advance
+// do you like what you see?
 #[cfg(test)]
 mod tests {
     use super::*;
